@@ -1,0 +1,27 @@
+{
+    "i18n": false,
+    "type": "tabs",
+    "items": {
+        "_options": {
+            "type": "panel",
+            "label": "Options",
+            "items": {
+                "clientLogin": {
+                    "type": "text",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "E-Mail",
+                    "help": "Login of your myIDM account"
+                },
+                "clientPassword": {
+                    "type": "password",
+                    "sm": 12,
+                    "md": 6,
+                    "lg": 6,
+                    "label": "Password"
+                }
+            }
+        }
+    }
+}

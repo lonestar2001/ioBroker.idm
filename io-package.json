@@ -1,0 +1,257 @@
+{
+    "common": {
+        "name": "idm",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial release",
+                "de": "Erstveröffentlichung",
+                "ru": "Начальная версия",
+                "pt": "lançamento inicial",
+                "nl": "Eerste uitgave",
+                "fr": "Première version",
+                "it": "Versione iniziale",
+                "es": "Versión inicial",
+                "pl": "Pierwsze wydanie",
+                "zh-cn": "首次出版"
+            }
+        },
+        "title": "IDM myIDM",
+        "titleLang": {
+            "en": "IDM myIDM",
+            "de": "IDM myIDM",
+            "ru": "IDM myIDM",
+            "pt": "IDM meuIDM",
+            "nl": "IDM mijnIDM",
+            "fr": "IDM monIDM",
+            "it": "IDM mioIDM",
+            "es": "IDM miIDM",
+            "pl": "IDM mójIDM",
+            "zh-cn": "IDM 我的IDM"
+        },
+        "desc": {
+            "en": "Integrate your IDM Heatpump via myIDM Webservice",
+            "de": "Integrieren Sie Ihre IDM Wärmepumpe über das myIDM Webservice",
+            "ru": "Интегрируйте свой тепловой насос IDM через веб-сервис myIDM",
+            "pt": "Integre sua bomba de calor IDM via myIDM Webservice",
+            "nl": "Integreer uw IDM Warmtepomp via myIDM Webservice",
+            "fr": "Intégrez votre pompe à chaleur IDM via le Webservice myIDM",
+            "it": "Integra la tua pompa di calore IDM tramite il servizio web myIDM",
+            "es": "Integre su bomba de calor IDM a través de myIDM Webservice",
+            "pl": "Zintegruj swoją pompę ciepła IDM za pośrednictwem usługi internetowej myIDM",
+            "zh-cn": "通过 myIDM Webservice 集成您的 IDM 热泵"
+        },
+        "authors": [
+            "Frank <frank.walter@gmail.com>"
+        ],
+        "keywords": [
+            "idm",
+            "myidm",
+            "heatpump"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "idm.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/lonestar2001/ioBroker.idm/main/admin/idm.png",
+        "readme": "https://github.com/lonestar2001/ioBroker.idm/blob/main/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "iot-systems",
+        "compact": true,
+        "connectionType": "cloud",
+        "dataSource": "poll",
+        "adminUI": {
+            "config": "json"
+        },
+        "eraseOnUpload": true,
+        "dependencies": [
+            {
+                "js-controller": ">=3.3.22"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=5.0.0"
+            }
+        ]
+    },
+    "native": {
+        "clientLogin": "",
+        "clientPassword": ""
+    },
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Device or service connected",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.installationName",
+            "type": "state",
+            "common": {
+                "name": "Name of your myIDM Installation",
+                "type": "string",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "circuit",
+            "type": "channel",
+            "common": {
+                "name": "Heating Circuit"
+            },
+            "native": {}
+        },
+        {
+            "_id": "circuit.tempHeat",
+            "type": "state",
+            "common": {
+                "name": "Wärmespeichertemperatur",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "circuit.tempParamsNormal",
+            "type": "state",
+            "common": {
+                "name": "Heating normal temperature",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "circuit.tempParamsEco",
+            "type": "state",
+            "common": {
+                "name": "Heating eco temperature",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "circuit.tempForerun",
+            "type": "state",
+            "common": {
+                "name": "Target forerun temperature",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "circuit.tempForerunActual",
+            "type": "state",
+            "common": {
+                "name": "Current forerun temperature",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "tempHygienic",
+            "type": "state",
+            "common": {
+                "name": "Current hygienic temperature",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "tempWater",
+            "type": "state",
+            "common": {
+                "name": "Aktuelle Zapftemperatur",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "sumHeat",
+            "type": "state",
+            "common": {
+                "name": "Wärmemengenzähler",
+                "type": "number",
+                "role": "value",
+                "unit": "kWh",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "tempOutside",
+            "type": "state",
+            "common": {
+                "name": "Aktuelle Außentemperatur",
+                "type": "number",
+                "role": "value",
+                "unit": "°C",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "error",
+            "type": "state",
+            "common": {
+                "name": "Aktueller Fehlercode",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        }
+    ]
+}
