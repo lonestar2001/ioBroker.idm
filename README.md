@@ -14,15 +14,23 @@
 
 Integrate your IDM Heatpump via myIDM Webservice
 
+Based on the work by <a href='https://beyer.app/blog/2018/10/home-assistant-integration-heatpump-idm-terra-ml-complete-hgl/'>Tom Beyer</a)>
+
+To use this adapter in your ioBroker environment, you need to have an account at myidm.at.
+
+Code tested with the following heat pumps:
+IDM Terra SW8 HGL
+
 ## Changelog
 <!--
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (Frank Walter) Removed some typos
 
 ### 0.0.2 (2022-10-13)
-* (Frank Walter) initial release
+* (Frank Walter) Initial release
 
 ## License
 MIT License
