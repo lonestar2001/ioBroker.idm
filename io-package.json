@@ -117,10 +117,22 @@
             "native": {}
         },
         {
+            "_id": "info.installationId",
+            "type": "state",
+            "common": {
+                "name": "ID of your myIDM Installation",
+                "type": "number",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
             "_id": "circuit",
             "type": "channel",
             "common": {
-                "name": "Heating Circuit"
+                "name": "Heizkreislauf A"
             },
             "native": {}
         },
@@ -141,7 +153,7 @@
             "_id": "circuit.tempParamsNormal",
             "type": "state",
             "common": {
-                "name": "Heating normal temperature",
+                "name": "Soll-Temperatur Normal",
                 "type": "number",
                 "role": "value",
                 "unit": "°C",
@@ -154,7 +166,7 @@
             "_id": "circuit.tempParamsEco",
             "type": "state",
             "common": {
-                "name": "Heating eco temperature",
+                "name": "Soll-Temperatur Eco",
                 "type": "number",
                 "role": "value",
                 "unit": "°C",
@@ -167,7 +179,7 @@
             "_id": "circuit.tempForerun",
             "type": "state",
             "common": {
-                "name": "Target forerun temperature",
+                "name": "Soll Vorlauftemperatur HK A",
                 "type": "number",
                 "role": "value",
                 "unit": "°C",
@@ -180,7 +192,7 @@
             "_id": "circuit.tempForerunActual",
             "type": "state",
             "common": {
-                "name": "Current forerun temperature",
+                "name": "Vorlauftemperatur HK A",
                 "type": "number",
                 "role": "value",
                 "unit": "°C",
@@ -190,10 +202,34 @@
             "native": {}
         },
         {
+            "_id": "circuit.state",
+            "type": "state",
+            "common": {
+                "name": "Zustand HK A",
+                "type": "string",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "circuit.mode",
+            "type": "state",
+            "common": {
+                "name": "Betriebsart HK A",
+                "type": "string",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
             "_id": "tempHygienic",
             "type": "state",
             "common": {
-                "name": "Current hygienic temperature",
+                "name": "TW-Erw. Temp. unten",
                 "type": "number",
                 "role": "value",
                 "unit": "°C",
@@ -206,7 +242,7 @@
             "_id": "tempWater",
             "type": "state",
             "common": {
-                "name": "Aktuelle Zapftemperatur",
+                "name": "Zapftemperatur",
                 "type": "number",
                 "role": "value",
                 "unit": "°C",
@@ -219,7 +255,7 @@
             "_id": "sumHeat",
             "type": "state",
             "common": {
-                "name": "Wärmemengenzähler",
+                "name": "Wärmemenge gesamt",
                 "type": "number",
                 "role": "value",
                 "unit": "kWh",
@@ -232,7 +268,7 @@
             "_id": "tempOutside",
             "type": "state",
             "common": {
-                "name": "Aktuelle Außentemperatur",
+                "name": "Außentemperatur",
                 "type": "number",
                 "role": "value",
                 "unit": "°C",
@@ -242,10 +278,34 @@
             "native": {}
         },
         {
+            "_id": "state",
+            "type": "state",
+            "common": {
+                "name": "Zustand",
+                "type": "string",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
+            "_id": "mode",
+            "type": "state",
+            "common": {
+                "name": "Betriebsart",
+                "type": "string",
+                "role": "value",
+                "read": true,
+                "write": false
+            },
+            "native": {}
+        },
+        {
             "_id": "error",
             "type": "state",
             "common": {
-                "name": "Aktueller Fehlercode",
+                "name": "Fehlercode",
                 "type": "number",
                 "role": "value",
                 "read": true,

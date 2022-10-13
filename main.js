@@ -23,6 +23,7 @@ class Idm extends utils.Adapter {
         });
 
         this.idmApiClient = null;
+        this.reloadTimeout = null;
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
@@ -35,6 +36,9 @@ class Idm extends utils.Adapter {
      * Is called when databases are connected and adapter received configuration.
      */
     async onReady() {
+
+        // Code based on the work of Tom Beyer
+        // https://beyer.app/blog/2018/10/home-assistant-integration-heatpump-idm-terra-ml-complete-hgl/
 
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
@@ -79,18 +83,24 @@ class Idm extends utils.Adapter {
     }
 
     async doLogin(){
-        
+
         // Encode password for server
         let passwordHashed = "";
         try {
+
             const hash = createHash('sha1');
             hash.update(this.config.clientPassword);
             passwordHashed = hash.digest('hex');
+
         } catch (err) {
+
             this.log.error(err);
+            this.setState('info.connection', false, true);
+
         }
 
         try {
+
             const payload = new URLSearchParams();
             payload.append('username',this.config.clientLogin);
             payload.append('password',passwordHashed);
@@ -99,17 +109,38 @@ class Idm extends utils.Adapter {
             const installations = await this.idmApiClient.post('/api/user/login',payload);
             
             if (installations.status == 200){
-                this.log.info('Successfully received session token');
+                this.log.debug('Successfully received session token');
 
                 await this.setStateAsync('info.installationName',installations.data['installations'][0]['name'],true);
+                await this.setStateAsync('info.installationId',parseInt(installations.data['installations'][0]['id']),true);
 
                 // load device data, currently only first device supported
                 this.getDeviceData(installations.data['token'],installations.data['installations'][0]['id'])
             } else {
                 this.log.warn('Server is returning: '+installations.status)
+                this.setState('info.connection', false, true);
             }
+
         } catch (err) {
+
             this.log.error(err);
+            // IDM Server does not return any other error but 404, so verfication if user or password is incorrect not possible
+            this.log.info('Please check if your e-mail and password are correct!')
+            this.setState('info.connection', false, true);
+
+        } finally {
+
+            // clear timeout if login triggered manually in between
+            if (this.reloadTimeout)
+                this.clearTimeout(this.reloadTimeout);
+
+            // Try again later or refresh data
+            this.reloadTimeout = this.setTimeout(() => {
+                this.reloadTimeout = null;
+                this.doLogin();
+            }, 5*60*1000); // every 5 minutes
+            this.log.debug('reloadTimeout triggered with id:'+this.reloadTimeout);
+
         }
 
     }
@@ -129,7 +160,8 @@ class Idm extends utils.Adapter {
             const deviceValues = await this.idmApiClient.post('/api/installation/values',payload);
             
             if (deviceValues.status == 200){
-                this.log.info('Successfully received device data');
+
+                this.log.debug('Successfully received device data');
                 this.setState('info.connection', true, true);
 
                 // updating water values
@@ -137,36 +169,31 @@ class Idm extends utils.Adapter {
                 await this.setStateAsync('tempWater',this.doConvertToFloat(deviceValues.data['temp_water']),true);
 
                 // updating system values
+                await this.setStateAsync('mode',deviceValues.data['mode'],true);
+                await this.setStateAsync('state',deviceValues.data['state'],true);
                 await this.setStateAsync('sumHeat',this.doConvertToFloat(deviceValues.data['sum_heat']),true);
                 await this.setStateAsync('tempOutside',this.doConvertToFloat(deviceValues.data['temp_outside']),true);
                 await this.setStateAsync('error',deviceValues.data['error'],true);
 
                 // updating circuit values
-                await this.setStateAsync('tempHeat',this.doConvertToFloat(deviceValues.data['temp_heat']),true);
-                await this.setStateAsync('tempParamsNormal',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_normal']['value']),true);
-                await this.setStateAsync('tempParamsEco',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_eco']['value']),true);
-                await this.setStateAsync('tempForerun',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun']),true);
-                await this.setStateAsync('tempForerunActual',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun_actual']),true);
+                await this.setStateAsync('circuit.mode',deviceValues.data['circuits'][0]['mode'],true);
+                await this.setStateAsync('circuit.state',deviceValues.data['circuits'][0]['state'],true);
+                await this.setStateAsync('circuit.tempHeat',this.doConvertToFloat(deviceValues.data['temp_heat']),true);
+                await this.setStateAsync('circuit.tempParamsNormal',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_normal']['value']),true);
+                await this.setStateAsync('circuit.tempParamsEco',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_eco']['value']),true);
+                await this.setStateAsync('circuit.tempForerun',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun']),true);
+                await this.setStateAsync('circuit.tempForerunActual',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun_actual']),true);
 
-                this.log.info('TW-Erw. unten: '+this.doConvertToFloat(deviceValues.data['temp_hygienic']));
-
-                /*
-print("---")
-print("Warmwasser")
-print("Heizung")
-print("* Wärmespeichertemperatur:",mydata['temp_heat'])
-print("* Betriebszustand Heizkreis:",circuitModeDictionary[mydata['circuits'][0]['state']])
-print("* Betriebsmodus Heizkreis:",circuitModeDictionary[mydata['circuits'][0]['mode']])
-print("System")
-print("* Betriebszustand System:",modeDictionary[mydata['state']])
-print("* Betriebsmodus System:",modeDictionary[mydata['mode']])
-*/
             } else {
                 this.log.warn('Server is returning: '+deviceValues.status)
             }
+
         } catch (err) {
-            this.log.error(err);
+
+            this.log.error(err);    
+
         }
+
     }
 
 
@@ -181,6 +208,10 @@ print("* Betriebsmodus System:",modeDictionary[mydata['mode']])
             // clearTimeout(timeout2);
             // ...
             // clearInterval(interval1);
+            if (this.reloadTimeout){
+                this.log.debug('reload Timeout: UNLOAD');
+                this.clearTimeout(this.reloadTimeout);
+            }
 
             callback();
         } catch (e) {
