@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "idm",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "news": {
+      "0.0.3": {
+        "en": "Removed some typos",
+        "de": "Einige Typos entfernt",
+        "ru": "Удалили некоторые опечатки",
+        "pt": "Removeu alguns erros",
+        "nl": "_",
+        "fr": "Enlevé quelques typos",
+        "it": "Rimuovi alcuni tipi",
+        "es": "Retirada de algunos tipos",
+        "pl": "Remove niektóre typy",
+        "uk": "Видалити деякі типоти",
+        "zh-cn": "取消某些危险"
+      },
       "0.0.2": {
         "en": "initial release",
         "de": "erstausstrahlung",
