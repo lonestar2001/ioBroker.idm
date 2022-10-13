@@ -1,6 +1,6 @@
 {
   "name": "iobroker.idm",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Integrate your IDM Heatpump via myIDM Webservice",
   "author": {
     "name": "Frank Walter",
