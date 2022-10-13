@@ -7,7 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-const { createHash, Hash } = require('crypto');
+const { createHash } = require('crypto');
 const axios = require('axios').default;
 const https = require('https');
 
@@ -85,7 +85,7 @@ class Idm extends utils.Adapter {
     async doLogin(){
 
         // Encode password for server
-        let passwordHashed = "";
+        let passwordHashed = '';
         try {
 
             const hash = createHash('sha1');
@@ -107,7 +107,7 @@ class Idm extends utils.Adapter {
 
             // @ts-ignore
             const installations = await this.idmApiClient.post('/api/user/login',payload);
-            
+
             if (installations.status == 200){
                 this.log.debug('Successfully received session token');
 
@@ -115,9 +115,9 @@ class Idm extends utils.Adapter {
                 await this.setStateAsync('info.installationId',parseInt(installations.data['installations'][0]['id']),true);
 
                 // load device data, currently only first device supported
-                this.getDeviceData(installations.data['token'],installations.data['installations'][0]['id'])
+                this.getDeviceData(installations.data['token'],installations.data['installations'][0]['id']);
             } else {
-                this.log.warn('Server is returning: '+installations.status)
+                this.log.warn('Server is returning: '+installations.status);
                 this.setState('info.connection', false, true);
             }
 
@@ -125,7 +125,7 @@ class Idm extends utils.Adapter {
 
             this.log.error(err);
             // IDM Server does not return any other error but 404, so verfication if user or password is incorrect not possible
-            this.log.info('Please check if your e-mail and password are correct!')
+            this.log.info('Please check if your e-mail and password are correct!');
             this.setState('info.connection', false, true);
 
         } finally {
@@ -158,7 +158,7 @@ class Idm extends utils.Adapter {
 
             // @ts-ignore
             const deviceValues = await this.idmApiClient.post('/api/installation/values',payload);
-            
+
             if (deviceValues.status == 200){
 
                 this.log.debug('Successfully received device data');
@@ -185,12 +185,12 @@ class Idm extends utils.Adapter {
                 await this.setStateAsync('circuit.tempForerunActual',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun_actual']),true);
 
             } else {
-                this.log.warn('Server is returning: '+deviceValues.status)
+                this.log.warn('Server is returning: '+deviceValues.status);
             }
 
         } catch (err) {
 
-            this.log.error(err);    
+            this.log.error(err);
 
         }
 
