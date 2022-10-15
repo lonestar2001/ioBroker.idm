@@ -7,7 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-const { createHash } = require('crypto');
+const { createHash, KeyObject } = require('crypto');
 const axios = require('axios').default;
 const https = require('https');
 
@@ -27,8 +27,6 @@ class Idm extends utils.Adapter {
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
-        // this.on('objectChange', this.onObjectChange.bind(this));
-        // this.on('message', this.onMessage.bind(this));
         this.on('unload', this.onUnload.bind(this));
     }
 
@@ -55,7 +53,7 @@ class Idm extends utils.Adapter {
 
         this.idmApiClient = axios.create({
             baseURL: 'https://www.myidm.at',
-            timeout: 1000,
+            timeout: 5000,
             headers: {
                 'User-Agent': 'IDM App (iOS)',
             },
@@ -80,6 +78,10 @@ class Idm extends utils.Adapter {
             you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
         */
 
+    }
+
+    doConvertToFloat(value){
+        return parseFloat(value); //parseFloat(value.replace('°C','').replace('kWh','').trim());
     }
 
     async doLogin(){
@@ -145,10 +147,6 @@ class Idm extends utils.Adapter {
 
     }
 
-    doConvertToFloat(value){
-        return parseFloat(value); //parseFloat(value.replace('°C','').replace('kWh','').trim());
-    }
-
     async getDeviceData(token, id){
 
         try {
@@ -164,20 +162,35 @@ class Idm extends utils.Adapter {
                 this.log.debug('Successfully received device data');
                 this.setState('info.connection', true, true);
 
+                const convertSystemState = {
+                    'icon_12': 'off',
+                    'icon_auto': 'automatic',
+                    'icon_3': 'hot_water',
+                    'icon_5': 'manual_heating'
+                };
+                const convertCircuitState = {
+                    'icon_12': 'off',
+                    'icon_24': 'time_program',
+                    'icon_21': 'normal',
+                    'icon_11': 'eco',
+                    'icon_5': 'manual_heating',
+                    'icon_1': 'manual cooling'
+                }
+        
                 // updating water values
                 await this.setStateAsync('tempHygienic',this.doConvertToFloat(deviceValues.data['temp_hygienic']),true);
                 await this.setStateAsync('tempWater',this.doConvertToFloat(deviceValues.data['temp_water']),true);
 
                 // updating system values
-                await this.setStateAsync('mode',deviceValues.data['mode'],true);
-                await this.setStateAsync('state',deviceValues.data['state'],true);
+                await this.setStateAsync('mode',convertSystemState[deviceValues.data['mode']],true);
+                await this.setStateAsync('state',convertSystemState[deviceValues.data['state']],true);
                 await this.setStateAsync('sumHeat',this.doConvertToFloat(deviceValues.data['sum_heat']),true);
                 await this.setStateAsync('tempOutside',this.doConvertToFloat(deviceValues.data['temp_outside']),true);
                 await this.setStateAsync('error',deviceValues.data['error'],true);
 
                 // updating circuit values
-                await this.setStateAsync('circuit.mode',deviceValues.data['circuits'][0]['mode'],true);
-                await this.setStateAsync('circuit.state',deviceValues.data['circuits'][0]['state'],true);
+                await this.setStateAsync('circuit.mode',convertCircuitState[deviceValues.data['circuits'][0]['mode']],true);
+                await this.setStateAsync('circuit.state',convertCircuitState[deviceValues.data['circuits'][0]['state']],true);
                 await this.setStateAsync('circuit.tempHeat',this.doConvertToFloat(deviceValues.data['temp_heat']),true);
                 await this.setStateAsync('circuit.tempParamsNormal',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_normal']['value']),true);
                 await this.setStateAsync('circuit.tempParamsEco',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_eco']['value']),true);
