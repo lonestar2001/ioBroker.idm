@@ -14,7 +14,7 @@
 
 Based on the work by <a href='https://beyer.app/blog/2018/10/home-assistant-integration-heatpump-idm-terra-ml-complete-hgl/'>Tom Beyer</a>
 
-Integrate your IDM Heatpump in ioBroker by using the myIDM web interface
+Integrate your IDM Heatpump in ioBroker via the interface of myIDM.
 To use this adapter in ioBroker, you need to have an account at myidm.at.
 
 The following heatpumps are supported/tested:

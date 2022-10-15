@@ -7,7 +7,7 @@
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
-const { createHash, KeyObject } = require('crypto');
+const { createHash } = require('crypto');
 const axios = require('axios').default;
 const https = require('https');
 
@@ -175,8 +175,8 @@ class Idm extends utils.Adapter {
                     'icon_11': 'eco',
                     'icon_5': 'manual_heating',
                     'icon_1': 'manual cooling'
-                }
-        
+                };
+
                 // updating water values
                 await this.setStateAsync('tempHygienic',this.doConvertToFloat(deviceValues.data['temp_hygienic']),true);
                 await this.setStateAsync('tempWater',this.doConvertToFloat(deviceValues.data['temp_water']),true);
