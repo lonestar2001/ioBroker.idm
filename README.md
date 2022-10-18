@@ -25,9 +25,9 @@ The following heatpumps are supported/tested:
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
     (lonestar2001) added controls for system and circuit mode
-    (lonestar2001) added adapter translations
 -->
 **WORK IN PROGRESS**
+* (lonestar2001) added adapter translations
 * (lonestar2001) added mode and state codes
 
 ### 0.0.3 (2022-10-13)
