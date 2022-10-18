@@ -11,15 +11,37 @@
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "E-Mail",
-                    "help": "Login of your myIDM account"
+                    "label": {
+                        "en": "E-Mail",
+                        "de": "E-Mail",
+                        "ru": "Электронная почта",
+                        "pt": "E-Mail",
+                        "nl": "E-Mail",
+                        "fr": "E-Mail",
+                        "it": "E-Mail",
+                        "es": "E-Mail",
+                        "pl": "E-Mail",
+                        "zh-cn": "E-Mail"
+                      },
+                    "help": "myIDM Login"
                 },
                 "clientPassword": {
                     "type": "password",
                     "sm": 12,
                     "md": 6,
                     "lg": 6,
-                    "label": "Password"
+                    "label": {
+                        "en": "Password",
+                        "de": "Passwort",
+                        "ru": "Пароль",
+                        "pt": "Senha",
+                        "nl": "Wachtwoord",
+                        "fr": "Mot de passe",
+                        "it": "Password",
+                        "es": "Contraseña",
+                        "pl": "Password",
+                        "zh-cn": "护照"
+                      }
                 }
             }
         }

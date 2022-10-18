@@ -40,30 +40,30 @@
         "zh-cn": "首次出版"
       }
     },
-    "title": "IDM myIDM",
+    "title": "IDM heatpumps",
     "titleLang": {
-      "en": "IDM myIDM",
-      "de": "IDM myIDM",
-      "ru": "IDM myIDM",
-      "pt": "IDM meuIDM",
-      "nl": "IDM mijnIDM",
-      "fr": "IDM monIDM",
-      "it": "IDM mioIDM",
-      "es": "IDM miIDM",
-      "pl": "IDM mójIDM",
-      "zh-cn": "IDM 我的IDM"
+      "en": "IDM heatpumps",
+      "de": "IDM Wärmepumpen",
+      "ru": "IDM тепла",
+      "pt": "Aquecedores IDM",
+      "nl": "IDM hittepumps",
+      "fr": "IDM heatpumps",
+      "it": "Pompe di calore IDM",
+      "es": "Bombas de calor IDM",
+      "pl": "IDM heatpump",
+      "zh-cn": "IDM 温度倾销"
     },
     "desc": {
-      "en": "Integrate your IDM Heatpump via myIDM Webservice",
-      "de": "Integrieren Sie Ihre IDM Wärmepumpe über das myIDM Webservice",
-      "ru": "Интегрируйте свой тепловой насос IDM через веб-сервис myIDM",
-      "pt": "Integre sua bomba de calor IDM via myIDM Webservice",
-      "nl": "Integreer uw IDM Warmtepomp via myIDM Webservice",
-      "fr": "Intégrez votre pompe à chaleur IDM via le Webservice myIDM",
-      "it": "Integra la tua pompa di calore IDM tramite il servizio web myIDM",
-      "es": "Integre su bomba de calor IDM a través de myIDM Webservice",
-      "pl": "Zintegruj swoją pompę ciepła IDM za pośrednictwem usługi internetowej myIDM",
-      "zh-cn": "通过 myIDM Webservice 集成您的 IDM 热泵"
+      "en": "Integrate your IDM heatpump via the myIDM interface",
+      "de": "Integrieren Sie Ihre IDM Wärmepumpe über die myIDM Schnittstelle",
+      "ru": "Интегрируйте ваш IDM тепла через интерфейс myIDM",
+      "pt": "Integrar seu dissipador de calor IDM através da interface myIDM",
+      "nl": "Integreren je IDM hittepump via de interface",
+      "fr": "Intégrez votre thermopompe IDM via l'interface myIDM",
+      "it": "Integra il tuo dissipatore IDM tramite l'interfaccia myIDM",
+      "es": "Integrar su bomba de calor IDM a través de la interfaz myIDM",
+      "pl": "Integracja twoja IDM ciepłapump poprzez interfejs myIDM",
+      "zh-cn": "通过我的IDM接口,将你的IDM温度汇聚一堂"
     },
     "authors": [
       "Frank <frank.walter@gmail.com>"
@@ -111,7 +111,19 @@
       "_id": "info",
       "type": "channel",
       "common": {
-        "name": "Information"
+        "name": {
+          "en": "Information",
+          "de": "Informationen",
+          "ru": "Информация",
+          "pt": "Informação",
+          "nl": "Informatie",
+          "fr": "Information",
+          "it": "Informazioni",
+          "es": "Información",
+          "pl": "Informacja",
+          "uk": "Інформація",
+          "zh-cn": "信息"
+        }
       },
       "native": {}
     },
@@ -120,7 +132,19 @@
       "type": "state",
       "common": {
         "role": "indicator.connected",
-        "name": "Device or service connected",
+        "name": {
+          "en": "Device or service connected",
+          "de": "Gerät verbunden",
+          "ru": "Устройство или сервис подключены",
+          "pt": "Dispositivo ou serviço conectado",
+          "nl": "Device of dienst verbonden",
+          "fr": "Appareil ou service connecté",
+          "it": "Dispositivo o servizio collegato",
+          "es": "Dispositivo o servicio conectado",
+          "pl": "Device",
+          "uk": "Пристрої або послуги підключені",
+          "zh-cn": "证人或有关服务"
+        },
         "type": "boolean",
         "read": true,
         "write": false,
@@ -132,7 +156,19 @@
       "_id": "info.installationName",
       "type": "state",
       "common": {
-        "name": "Name of your myIDM Installation",
+        "name": {
+          "en": "myIDM name",
+          "de": "myIDM Name",
+          "ru": "myIDM имя",
+          "pt": "nome do myIDM",
+          "nl": "mijn naam",
+          "fr": "myIDM name",
+          "it": "nome myIDM",
+          "es": "myIDM nombre",
+          "pl": "myIDM",
+          "uk": "ім'я",
+          "zh-cn": "iIDM名称"
+        },
         "type": "string",
         "role": "value",
         "read": true,
@@ -144,7 +180,19 @@
       "_id": "info.installationId",
       "type": "state",
       "common": {
-        "name": "ID of your myIDM Installation",
+        "name": {
+          "en": "myIDM id",
+          "de": "myIDM ID",
+          "ru": "myIDM идентификатор",
+          "pt": "o meu cartão",
+          "nl": "_",
+          "fr": "myIDM id",
+          "it": "myIDM id",
+          "es": "myIDM id",
+          "pl": "myIDM id",
+          "uk": "увійти",
+          "zh-cn": "iIDM id"
+        },
         "type": "number",
         "role": "value",
         "read": true,
@@ -156,7 +204,19 @@
       "_id": "circuit",
       "type": "channel",
       "common": {
-        "name": "Heizkreislauf A"
+        "name": {
+          "en": "Heating circuit A",
+          "de": "Heizkreislauf A",
+          "ru": "Отопление А",
+          "pt": "Circuito de aquecimento A",
+          "nl": "Heling circuit A",
+          "fr": "Circuit de chauffage A",
+          "it": "Circuito di riscaldamento A",
+          "es": "Circuito de calefacción A",
+          "pl": "Przewodnik A",
+          "uk": "Схема опалення Р",
+          "zh-cn": "D. 排 情 A. 导 言"
+        }
       },
       "native": {}
     },
@@ -164,7 +224,19 @@
       "_id": "circuit.tempHeat",
       "type": "state",
       "common": {
-        "name": "Wärmespeichertemperatur",
+        "name": {
+          "en": "Heat accumulator temperature",
+          "de": "Wärmespeichertemperatur",
+          "ru": "Температура теплоаккумулятора",
+          "pt": "Temperatura do acumulador de calor",
+          "nl": "Heat accumulator temperatuur",
+          "fr": "Température de l ' accumulateur thermique",
+          "it": "Temperatura di accumulatore di calore",
+          "es": "Temperatura del acumulador de calor",
+          "pl": "Heat accumulator temperature",
+          "uk": "Температура акумулятора тепла",
+          "zh-cn": "气温"
+        },
         "type": "number",
         "role": "value",
         "unit": "°C",
@@ -177,7 +249,19 @@
       "_id": "circuit.tempParamsNormal",
       "type": "state",
       "common": {
-        "name": "Soll-Temperatur Normal",
+        "name": {
+          "en": "Target temperature normal",
+          "de": "Soll Temperatur Normal",
+          "ru": "Целевая температура нормальная",
+          "pt": "Temperatura de alvo normal",
+          "nl": "Doeltemperatuur normaal",
+          "fr": "Température cible normale",
+          "it": "Temperatura di destinazione normale",
+          "es": "Temperatura del objetivo normal",
+          "pl": "Temperatura normalna",
+          "uk": "Звичайна температура цілі",
+          "zh-cn": "目标温度"
+        },
         "type": "number",
         "role": "value",
         "unit": "°C",
@@ -190,7 +274,19 @@
       "_id": "circuit.tempParamsEco",
       "type": "state",
       "common": {
-        "name": "Soll-Temperatur Eco",
+        "name": {
+          "en": "Target temperature eco",
+          "de": "Soll Temperatur Eco",
+          "ru": "Целевая температура эко",
+          "pt": "Temperatura de alvo eco",
+          "nl": "Doeltemperatuur eco",
+          "fr": "Température cible",
+          "it": "Temperatura di destinazione eco",
+          "es": "Temperatura del objetivo",
+          "pl": "Ekologiczny",
+          "uk": "Цільова температура еко",
+          "zh-cn": "目标温度"
+        },
         "type": "number",
         "role": "value",
         "unit": "°C",
@@ -203,7 +299,19 @@
       "_id": "circuit.tempForerun",
       "type": "state",
       "common": {
-        "name": "Soll Vorlauftemperatur HK A",
+        "name": {
+          "en": "Target flow temperature heating circuit A",
+          "de": "Soll Vorlauftemperatur Heizkreislauf A",
+          "ru": "Целевая температура потока тепловая схема А",
+          "pt": "Circuito de calor de temperatura de fluxo alvo A",
+          "nl": "Doelwit stroomtemperatuur circuit A",
+          "fr": "Circuit de chaleur de température de débit cible A",
+          "it": "Circuito di calore della temperatura di flusso target A",
+          "es": "Circuito de calor de flujo objetivo A",
+          "pl": "Przestrzeń cieplna A",
+          "uk": "Цільова температура потоку тепла схема Р",
+          "zh-cn": "目标流温热管道 A. 导 言"
+        },
         "type": "number",
         "role": "value",
         "unit": "°C",
@@ -216,7 +324,19 @@
       "_id": "circuit.tempForerunActual",
       "type": "state",
       "common": {
-        "name": "Vorlauftemperatur HK A",
+        "name": {
+          "en": "Flow temperature heating circuit A",
+          "de": "Vorlauftemperatur Heizkreislauf A",
+          "ru": "Поток температуры тепла цепи А",
+          "pt": "Circuito de calor de temperatura de fluxo A",
+          "nl": "Flow temperatuur circuit A",
+          "fr": "Circuit thermique A",
+          "it": "Circuito di calore della temperatura di flusso A",
+          "es": "Circuito de calor de temperatura baja A",
+          "pl": "Obwodnica A",
+          "uk": "Температура потоку тепла схема Р",
+          "zh-cn": "温度温热管道 A. 导 言"
+        },
         "type": "number",
         "role": "value",
         "unit": "°C",
@@ -229,7 +349,19 @@
       "_id": "circuit.state",
       "type": "state",
       "common": {
-        "name": "Zustand HK A",
+        "name": {
+          "en": "State Heating Circuit A",
+          "de": "Zustand Heizkreislauf A",
+          "ru": "Статус Heat Circuit А",
+          "pt": "Circuito de calor de status A",
+          "nl": "Status Heat Circuit A",
+          "fr": "Circuit Heat A",
+          "it": "Circuito di calore A",
+          "es": "Circuito de calor de estado A",
+          "pl": "Status Heat Circuit A",
+          "uk": "Статус на сервери Р",
+          "zh-cn": "现状 A. 导 言"
+        },
         "type": "string",
         "role": "value",
         "read": true,
@@ -241,7 +373,19 @@
       "_id": "circuit.mode",
       "type": "state",
       "common": {
-        "name": "Betriebsart HK A",
+        "name": {
+          "en": "Operating mode Heating Circuit A",
+          "de": "Betriebsart Heizkreislauf A",
+          "ru": "Режим работы Тепловые цепи А",
+          "pt": "Modo de funcionamento Circuito de calor A",
+          "nl": "Opererende beweging Heat Circuit A",
+          "fr": "Mode opératoire Circuit de chaleur A",
+          "it": "Modalità di funzionamento Circuito di calore A",
+          "es": "Modo operativo Circuito de calor A",
+          "pl": "Tryb operowy Heat Circuit A",
+          "uk": "Режим роботи Теплова схема Р",
+          "zh-cn": "操作方式 Heat Circuit A. 导 言"
+        },
         "type": "string",
         "role": "value",
         "read": true,
@@ -253,7 +397,19 @@
       "_id": "tempHygienic",
       "type": "state",
       "common": {
-        "name": "TW-Erw. Temp. unten",
+        "name": {
+          "en": "Drinking water temperature bottom",
+          "de": "TW-Erw. Temp. unten",
+          "ru": "Питьевая температура воды дно",
+          "pt": "Água potável inferior",
+          "nl": "Drinken watertemperatuur onder",
+          "fr": "Basse de la température de l'eau potable",
+          "it": "Calore di temperatura dell'acqua potabile",
+          "es": "Temperatura de agua potable inferior",
+          "pl": "Temperatura wody",
+          "uk": "Питна температура води дна",
+          "zh-cn": "水温降到底"
+        },
         "type": "number",
         "role": "value",
         "unit": "°C",
@@ -266,7 +422,19 @@
       "_id": "tempWater",
       "type": "state",
       "common": {
-        "name": "Zapftemperatur",
+        "name": {
+          "en": "Tap temperature",
+          "de": "Zapftemperatur",
+          "ru": "Температура мыла",
+          "pt": "Temperatura de torneira",
+          "nl": "Tap temperatuur",
+          "fr": "Température du robinet",
+          "it": "Temperatura del rubinetto",
+          "es": "Temperatura del tacto",
+          "pl": "Temperatura tap",
+          "uk": "Температура запобіжника",
+          "zh-cn": "温度"
+        },
         "type": "number",
         "role": "value",
         "unit": "°C",
@@ -279,7 +447,19 @@
       "_id": "sumHeat",
       "type": "state",
       "common": {
-        "name": "Wärmemenge gesamt",
+        "name": {
+          "en": "Total heat quantity",
+          "de": "Wärmemenge gesamt",
+          "ru": "Общее количество тепла",
+          "pt": "Quantidade de calor total",
+          "nl": "Totale hitte kwantiteit",
+          "fr": "Quantité totale de chaleur",
+          "it": "Quantità di calore totale",
+          "es": "Cantidad total de calor",
+          "pl": "Ilość ciepła",
+          "uk": "Загальна кількість тепла",
+          "zh-cn": "热量总量"
+        },
         "type": "number",
         "role": "value",
         "unit": "kWh",
@@ -292,7 +472,19 @@
       "_id": "tempOutside",
       "type": "state",
       "common": {
-        "name": "Außentemperatur",
+        "name": {
+          "en": "Outdoor temperature",
+          "de": "Außentemperatur",
+          "ru": "Температура на открытом воздухе",
+          "pt": "Temperatura exterior",
+          "nl": "Buitenste temperatuur",
+          "fr": "Température extérieure",
+          "it": "Temperatura esterna",
+          "es": "Temperatura exterior",
+          "pl": "Temperatura zewnętrzna",
+          "uk": "Зовнішня температура",
+          "zh-cn": "室内温度"
+        },
         "type": "number",
         "role": "value",
         "unit": "°C",
@@ -305,7 +497,19 @@
       "_id": "state",
       "type": "state",
       "common": {
-        "name": "Zustand",
+        "name": {
+          "en": "Status",
+          "de": "Zustand",
+          "ru": "Статус",
+          "pt": "Estado",
+          "nl": "Status",
+          "fr": "État",
+          "it": "Stato",
+          "es": "Situación",
+          "pl": "Status",
+          "uk": "Статус на сервери",
+          "zh-cn": "现状"
+        },
         "type": "string",
         "role": "value",
         "read": true,
@@ -317,7 +521,19 @@
       "_id": "mode",
       "type": "state",
       "common": {
-        "name": "Betriebsart",
+        "name": {
+          "en": "Operating mode",
+          "de": "Betriebsart",
+          "ru": "Режим работы",
+          "pt": "Modo de funcionamento",
+          "nl": "Opererende beweging",
+          "fr": "Mode opératoire",
+          "it": "Modalità di funzionamento",
+          "es": "Modo operativo",
+          "pl": "Tryb operowy",
+          "uk": "Режим роботи",
+          "zh-cn": "操作方式"
+        },
         "type": "string",
         "role": "value",
         "read": true,
@@ -329,7 +545,19 @@
       "_id": "error",
       "type": "state",
       "common": {
-        "name": "Fehlercode",
+        "name": {
+          "en": "Error code",
+          "de": "Fehlercode",
+          "ru": "код ошибки",
+          "pt": "código de erro",
+          "nl": "errorcode",
+          "fr": "code d ' erreur",
+          "it": "codice di errore",
+          "es": "error código",
+          "pl": "kod",
+          "uk": "код помилки",
+          "zh-cn": "错误"
+        },
         "type": "number",
         "role": "value",
         "read": true,

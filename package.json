@@ -1,10 +1,10 @@
 {
   "name": "iobroker.idm",
   "version": "0.0.3",
-  "description": "Integrate your IDM Heatpump via myIDM Webservice",
+  "description": "Integrate your IDM Heatpump via myIDM interface",
   "author": {
     "name": "Frank Walter",
-    "email": "frank.walter@ymail.com"
+    "email": "frank.walter@gmail.com"
   },
   "homepage": "https://github.com/lonestar2001/ioBroker.idm",
   "license": "MIT",
