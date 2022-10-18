@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "idm",
-    "version": "0.0.3",
+    "version": "0.1.0",
     "news": {
+      "0.1.0": {
+        "en": "added adapter translations\nadded mode and state codes",
+        "de": "zusätzliche adapter übersetzungen\nzusatzmodus und zustandscodes",
+        "ru": "добавлены переводы адаптеров\nдобавлен режим и государственные коды",
+        "pt": "traduções de adaptador adicionado\nmodo adicionado e códigos de estado",
+        "nl": "vertaling:\nvoegde mode en staatscodes toe",
+        "fr": "traductions d'adaptateurs supplémentaires\nmode ajouté et codes d'état",
+        "it": "traduzioni dell'adattatore\nmodalità aggiunta e codici di stato",
+        "es": "traducciones de adaptador añadido\nañadido códigos de modo y estado",
+        "pl": "tłumaczenie adaptatorowe\nkod dodawany",
+        "uk": "додано переклади адаптерів\nдодані режими та державні коди",
+        "zh-cn": "增 编\n附加模式和国家法典"
+      },
       "0.0.3": {
         "en": "Removed some typos",
         "de": "Einige Typos entfernt",
