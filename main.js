@@ -84,6 +84,20 @@ class Idm extends utils.Adapter {
         return parseFloat(value); //parseFloat(value.replace('°C','').replace('kWh','').trim());
     }
 
+    // Todo:
+    // Command for setting circuit modes:
+    // www.myidm.at /api/installation/command
+    // token: token
+    // installation: id
+    // command: circuit_mode
+    // value: 0 (off) 1 (time_program) 2 (normal) 3 (eco) 4 (manual_heating) 5 (manual_cooling)
+    // circuit: 0
+
+    // Command for setting system modes:
+
+    // Todo:
+    // read installations[0]['config'] for supported fields to enable a more generic adapter (only on request)
+
     async doLogin(){
 
         // Encode password for server
@@ -173,8 +187,9 @@ class Idm extends utils.Adapter {
                     'icon_24': 'time_program',
                     'icon_21': 'normal',
                     'icon_11': 'eco',
-                    'icon_5': 'manual_heating',
-                    'icon_1': 'manual cooling'
+                    'icon_5': 'manual_heating', // icon state
+                    'icon_1': 'manual cooling',
+                    'icon_10': 'manual_heating' // icon mode
                 };
 
                 // updating water values
