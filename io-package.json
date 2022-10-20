@@ -586,23 +586,23 @@
       "native": {}
     },
     {
-      "_id": "error",
+      "_id": "errors",
       "type": "state",
       "common": {
         "name": {
-          "en": "Error code",
-          "de": "Fehlercode",
-          "ru": "код ошибки",
-          "pt": "código de erro",
-          "nl": "errorcode",
-          "fr": "code d ' erreur",
-          "it": "codice di errore",
-          "es": "error código",
-          "pl": "kod",
-          "uk": "код помилки",
-          "zh-cn": "错误"
+          "en": "Error memory",
+          "de": "Fehlerspeicher",
+          "ru": "Ошибка памяти",
+          "pt": "Memória de erro",
+          "nl": "Error geheugen",
+          "fr": "Mémoire d ' erreur",
+          "it": "Memoria di errore",
+          "es": "Memoria de error",
+          "pl": "Pamięć pamięci",
+          "uk": "Пам'ять",
+          "zh-cn": "记忆"
         },
-        "type": "number",
+        "type": "string",
         "role": "value",
         "read": true,
         "write": false

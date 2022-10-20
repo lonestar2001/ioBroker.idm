@@ -14,18 +14,20 @@
 
 Based on the work by <a href='https://beyer.app/blog/2018/10/home-assistant-integration-heatpump-idm-terra-ml-complete-hgl/'>Tom Beyer</a>
 
-Integrate your IDM Heatpump in ioBroker via the interface of myIDM.
+Integrate your IDM heat pump in ioBroker via the interface of myIDM.
 To use this adapter in ioBroker, you need to have an account at myidm.at.
 
-The following heatpumps are supported/tested:
+The adapter does not output live data from the heat pump. Every 5 minutes the data is loaded from the cloud. However, the heat pump only uploads the current values every 30-60 minutes.
+
+The following heat pumps are supported/tested:
 * IDM Terra SW8 HGL
 
 The current version has the following limitations (due to missing hardware):
-* only the first heatpump from your myidm account is displayed
+* only the first heat pump from your myidm account is displayed
 * only one heating circuit is shown
 * no support for cooling circuits/modes
 * no support for solar modes
-* no support for controlling your heatpump yet (work in progress)
+* no support for controlling your heat pump yet (work in progress)
 
 ## Changelog
 <!--
