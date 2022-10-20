@@ -586,6 +586,30 @@
       "native": {}
     },
     {
+      "_id": "error",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Error",
+          "de": "Fehler",
+          "ru": "Ошибка",
+          "pt": "Erro",
+          "nl": "Error",
+          "fr": "Erreur",
+          "it": "Errore",
+          "es": "Error",
+          "pl": "Error",
+          "uk": "Про нас",
+          "zh-cn": "Error"
+        },
+        "type": "number",
+        "role": "value",
+        "read": true,
+        "write": false
+      },
+      "native": {}
+    },
+    {
       "_id": "errors",
       "type": "state",
       "common": {

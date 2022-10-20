@@ -203,6 +203,7 @@ class Idm extends utils.Adapter {
                 this.log.debug('Current system state: '+deviceValues.data['state']);
                 await this.setStateAsync('sumHeat',this.doConvertToFloat(deviceValues.data['sum_heat']),true);
                 await this.setStateAsync('tempOutside',this.doConvertToFloat(deviceValues.data['temp_outside']),true);
+                await this.setStateAsync('error',deviceValues.data['error'],true);
                 await this.setStateAsync('errors',JSON.stringify(deviceValues.data['errors']),true);
                 this.log.debug('Current errors: '+JSON.stringify(deviceValues.data['errors']));
 
