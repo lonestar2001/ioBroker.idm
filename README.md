@@ -20,12 +20,22 @@ To use this adapter in ioBroker, you need to have an account at myidm.at.
 The following heatpumps are supported/tested:
 * IDM Terra SW8 HGL
 
+The current version has the following limitations (due to missing hardware):
+* only the first heatpump from your myidm account is displayed
+* only one heating circuit is shown
+* no support for cooling circuits/modes
+* no support for solar modes
+* no support for controlling your heatpump yet (work in progress)
+
 ## Changelog
 <!--
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
     (lonestar2001) added controls for system and circuit mode
 -->
+### **WORK IN PROGRESS**
+* (lonestar2001) changed channel structure for future compatibility
+
 ### 0.1.1 (2022-10-20)
 * (lonestar2001) added missing circuit mode for manual_heating
 
