@@ -176,20 +176,20 @@ class Idm extends utils.Adapter {
                 this.log.debug('Successfully received device data');
                 this.setState('info.connection', true, true);
 
-                const convertSystemState = {
-                    'icon_12': 'off',
-                    'icon_auto': 'automatic',
-                    'icon_3': 'hot_water',
-                    'icon_5': 'manual_heating'
+                const convertState = {
+                    'icon_12': 'off',           // system & circuit
+                    'icon_3': 'hot_water',      // system
+                    'icon_5': 'heating'         // circuit & (by mistake also system sometimes)
                 };
-                const convertCircuitState = {
-                    'icon_12': 'off',
-                    'icon_24': 'time_program',
-                    'icon_21': 'normal',
-                    'icon_11': 'eco',
-                    'icon_5': 'manual_heating', // icon state
-                    'icon_1': 'manual cooling',
-                    'icon_10': 'manual_heating' // icon mode
+                const convertMode = {
+                    'icon_12': 'off',           // system & circuit
+                    'icon_24': 'time_program',  // circuit
+                    'icon_21': 'normal',        // circuit
+                    'icon_11': 'eco',           // circuit
+                    'icon_10': 'manual_heating',// circuit
+                    'icon_1': 'manual_cooling', // circuit
+                    'icon_auto': 'automatic',   // system
+                    'icon_3': 'hot_water'       // system
                 };
 
                 // updating water values
@@ -197,20 +197,24 @@ class Idm extends utils.Adapter {
                 await this.setStateAsync('tempWater',this.doConvertToFloat(deviceValues.data['temp_water']),true);
 
                 // updating system values
-                await this.setStateAsync('mode',convertSystemState[deviceValues.data['mode']],true);
-                await this.setStateAsync('state',convertSystemState[deviceValues.data['state']],true);
+                await this.setStateAsync('mode',convertMode[deviceValues.data['mode']],true);
+                this.log.debug('Current system mode: '+deviceValues.data['mode']);
+                await this.setStateAsync('state',convertState[deviceValues.data['state']],true);
+                this.log.debug('Current system state: '+deviceValues.data['state']);
                 await this.setStateAsync('sumHeat',this.doConvertToFloat(deviceValues.data['sum_heat']),true);
                 await this.setStateAsync('tempOutside',this.doConvertToFloat(deviceValues.data['temp_outside']),true);
                 await this.setStateAsync('error',deviceValues.data['error'],true);
 
                 // updating circuit values
-                await this.setStateAsync('circuit.mode',convertCircuitState[deviceValues.data['circuits'][0]['mode']],true);
-                await this.setStateAsync('circuit.state',convertCircuitState[deviceValues.data['circuits'][0]['state']],true);
-                await this.setStateAsync('circuit.tempHeat',this.doConvertToFloat(deviceValues.data['temp_heat']),true);
-                await this.setStateAsync('circuit.tempParamsNormal',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_normal']['value']),true);
-                await this.setStateAsync('circuit.tempParamsEco',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_eco']['value']),true);
-                await this.setStateAsync('circuit.tempForerun',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun']),true);
-                await this.setStateAsync('circuit.tempForerunActual',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun_actual']),true);
+                await this.setStateAsync('circuits.0.mode',convertMode[deviceValues.data['circuits'][0]['mode']],true);
+                this.log.debug('Current circuit mode: '+deviceValues.data['circuits'][0]['mode']);
+                await this.setStateAsync('circuits.0.state',convertState[deviceValues.data['circuits'][0]['state']],true);
+                this.log.debug('Current circuit state: '+deviceValues.data['circuits'][0]['state']);
+                await this.setStateAsync('circuits.0.tempHeat',this.doConvertToFloat(deviceValues.data['temp_heat']),true);
+                await this.setStateAsync('circuits.0.tempParamsNormal',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_normal']['value']),true);
+                await this.setStateAsync('circuits.0.tempParamsEco',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_eco']['value']),true);
+                await this.setStateAsync('circuits.0.tempForerun',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun']),true);
+                await this.setStateAsync('circuits.0.tempForerunActual',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun_actual']),true);
 
             } else {
                 this.log.warn('Server is returning: '+deviceValues.status);

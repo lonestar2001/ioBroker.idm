@@ -13,7 +13,6 @@
         "it": "aggiunta modalità circuito mancante per il riscaldamento manuale",
         "es": "modo de circuito perdido añadido para el calentamiento manual",
         "pl": "dystrybucja ręczna (ang.)",
-        "uk": "доданий відсутній режим ланцюга для ручного_теплення",
         "zh-cn": "添加了手册中遗漏的管道。"
       },
       "0.1.0": {
@@ -26,7 +25,6 @@
         "it": "traduzioni dell'adattatore\nmodalità aggiunta e codici di stato",
         "es": "traducciones de adaptador añadido\nañadido códigos de modo y estado",
         "pl": "tłumaczenie adaptatorowe\nkod dodawany",
-        "uk": "додано переклади адаптерів\nдодані режими та державні коди",
         "zh-cn": "增 编\n附加模式和国家法典"
       },
       "0.0.3": {
@@ -227,7 +225,27 @@
       "native": {}
     },
     {
-      "_id": "circuit",
+      "_id": "circuits",
+      "type": "channel",
+      "common": {
+        "name": {
+          "en": "Heating circuits",
+          "de": "Heizkreisläufe",
+          "ru": "Отопление",
+          "pt": "Circuitos de aquecimento",
+          "nl": "Heetende circuits",
+          "fr": "Circuits de chauffage",
+          "it": "Circuiti di riscaldamento",
+          "es": "Circuitos de calefacción",
+          "pl": "Łączy towary",
+          "uk": "Нагрівальні схеми",
+          "zh-cn": "D. 排 票"
+        }
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0",
       "type": "channel",
       "common": {
         "name": {
@@ -247,7 +265,7 @@
       "native": {}
     },
     {
-      "_id": "circuit.tempHeat",
+      "_id": "circuits.0.tempHeat",
       "type": "state",
       "common": {
         "name": {
@@ -272,7 +290,7 @@
       "native": {}
     },
     {
-      "_id": "circuit.tempParamsNormal",
+      "_id": "circuits.0.tempParamsNormal",
       "type": "state",
       "common": {
         "name": {
@@ -297,7 +315,7 @@
       "native": {}
     },
     {
-      "_id": "circuit.tempParamsEco",
+      "_id": "circuits.0.tempParamsEco",
       "type": "state",
       "common": {
         "name": {
@@ -322,7 +340,7 @@
       "native": {}
     },
     {
-      "_id": "circuit.tempForerun",
+      "_id": "circuits.0.tempForerun",
       "type": "state",
       "common": {
         "name": {
@@ -347,7 +365,7 @@
       "native": {}
     },
     {
-      "_id": "circuit.tempForerunActual",
+      "_id": "circuits.0.tempForerunActual",
       "type": "state",
       "common": {
         "name": {
@@ -372,7 +390,7 @@
       "native": {}
     },
     {
-      "_id": "circuit.state",
+      "_id": "circuits.0.state",
       "type": "state",
       "common": {
         "name": {
@@ -396,7 +414,7 @@
       "native": {}
     },
     {
-      "_id": "circuit.mode",
+      "_id": "circuits.0.mode",
       "type": "state",
       "common": {
         "name": {
