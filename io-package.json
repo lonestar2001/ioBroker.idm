@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "idm",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "added missing circuit mode for manual_heating",
+        "de": "zusatz fehlender schaltungsmodus für manual_heizung",
+        "ru": "добавлен отсутствует режим цепи для manual_heating",
+        "pt": "adicionado modo de circuito ausente para manual_aquecimento",
+        "nl": "vermiste circuitmode toegevoegd voor de handgemaakte",
+        "fr": "mode de circuit manquant pour manual_heating",
+        "it": "aggiunta modalità circuito mancante per il riscaldamento manuale",
+        "es": "modo de circuito perdido añadido para el calentamiento manual",
+        "pl": "dystrybucja ręczna (ang.)",
+        "uk": "доданий відсутній режим ланцюга для ручного_теплення",
+        "zh-cn": "添加了手册中遗漏的管道。"
+      },
       "0.1.0": {
         "en": "added adapter translations\nadded mode and state codes",
         "de": "zusätzliche adapter übersetzungen\nzusatzmodus und zustandscodes",
