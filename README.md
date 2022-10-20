@@ -26,6 +26,9 @@ The following heatpumps are supported/tested:
     ### **WORK IN PROGRESS**
     (lonestar2001) added controls for system and circuit mode
 -->
+### **WORK IN PROGRESS**
+* (lonestar2001) added missing circuit mode for manual_heating
+
 ### 0.1.0 (2022-10-18)
 * (lonestar2001) added adapter translations
 * (lonestar2001) added mode and state codes
