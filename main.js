@@ -94,6 +94,13 @@ class Idm extends utils.Adapter {
     // circuit: 0
 
     // Command for setting system modes:
+    // www.myidm.at /api/installation/command
+    // token: token
+    // installation: id
+    // command: system_mode
+    // value: 0 (off) 1 (automatic) 2 (hot_water) 3 (hot_water_once)
+    // circuit: 0
+    // hot_water_once will never be displayed as mode (more like a button). hot_water_once activates state "hot_water". mode changes (back) to "automatic"
 
     // Todo:
     // read installations[0]['config'] for supported fields to enable a more generic adapter (only on request)
@@ -178,7 +185,7 @@ class Idm extends utils.Adapter {
 
                 const convertState = {
                     'icon_12': 'off',           // system & circuit
-                    'icon_3': 'hot_water',      // system
+                    'icon_3': 'heating_water',  // system
                     'icon_5': 'heating'         // circuit & (by mistake also system sometimes)
                 };
                 const convertMode = {
