@@ -35,7 +35,7 @@ The current version has the following limitations (due to missing hardware):
     ### **WORK IN PROGRESS**
     (lonestar2001) added controls for system and circuit mode
 -->
-### **WORK IN PROGRESS**
+### 0.2.0 (2022-10-21)
 * (lonestar2001) changed channel structure for future compatibility
 
 ### 0.1.1 (2022-10-20)

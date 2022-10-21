@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "idm",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "news": {
+      "0.2.0": {
+        "en": "changed channel structure for future compatibility",
+        "de": "geänderte kanalstruktur für zukünftige kompatibilität",
+        "ru": "измененная структура канала для будущей совместимости",
+        "pt": "estrutura de canal alterado para futura compatibilidade",
+        "nl": "veranderingsstructuur voor toekomstige compatibiliteit",
+        "fr": "changement de structure de canal pour la compatibilité future",
+        "it": "struttura del canale modificata per la compatibilità futura",
+        "es": "cambio de estructura de canales para la compatibilidad futura",
+        "pl": "zmieniona struktura kanałowa dla przyszłej kompatybilności",
+        "uk": "змінено структуру каналів для майбутньої сумісності",
+        "zh-cn": "b. 改变今后兼容性的渠道结构"
+      },
       "0.1.1": {
         "en": "added missing circuit mode for manual_heating",
         "de": "zusatz fehlender schaltungsmodus für manual_heizung",
