@@ -25,16 +25,18 @@ The following heat pumps are supported/tested:
 The current version has the following limitations (due to missing hardware):
 * only the first heat pump from your myidm account is displayed
 * only one heating circuit is shown
-* no support for cooling circuits/modes
 * no support for solar modes
-* no support for controlling your heat pump yet (work in progress)
+* no modification of heating parameters (mode change possible)
 
 ## Changelog
 <!--
     Placeholder for the next version (at the beginning of the line):
     ### **WORK IN PROGRESS**
-    (lonestar2001) added controls for system and circuit mode
 -->
+### **WORK IN PROGRESS**
+* (lonestar2001) added controls for system and circuit mode
+* (lonestar2001) added debug information
+
 ### 0.2.0 (2022-10-21)
 * (lonestar2001) changed channel structure for future compatibility
 

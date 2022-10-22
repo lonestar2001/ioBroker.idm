@@ -24,6 +24,9 @@ class Idm extends utils.Adapter {
 
         this.idmApiClient = null;
         this.reloadTimeout = null;
+        this.debugData = null;
+        this.token = null;
+        this.id = null;
 
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
@@ -85,24 +88,6 @@ class Idm extends utils.Adapter {
     }
 
     // Todo:
-    // Command for setting circuit modes:
-    // www.myidm.at /api/installation/command
-    // token: token
-    // installation: id
-    // command: circuit_mode
-    // value: 0 (off) 1 (time_program) 2 (normal) 3 (eco) 4 (manual_heating) 5 (manual_cooling)
-    // circuit: 0
-
-    // Command for setting system modes:
-    // www.myidm.at /api/installation/command
-    // token: token
-    // installation: id
-    // command: system_mode
-    // value: 0 (off) 1 (automatic) 2 (hot_water) 3 (hot_water_once)
-    // circuit: 0
-    // hot_water_once will never be displayed as mode (more like a button). hot_water_once activates state "hot_water". mode changes (back) to "automatic"
-
-    // Todo:
     // read installations[0]['config'] for supported fields to enable a more generic adapter (only on request)
 
     async doLogin(){
@@ -132,13 +117,22 @@ class Idm extends utils.Adapter {
             const installations = await this.idmApiClient.post('/api/user/login',payload);
 
             if (installations.status == 200){
-                this.log.debug('Successfully received session token');
+
+                if (!this.debugData){
+                    // debug all devices found in installations
+                    installations.data['installations'].forEach((item,idx) => {
+                        this.log.debug('Config-Data '+idx+': '+JSON.stringify(item));
+                    });
+                }
+
+                this.log.debug('Received session token');
 
                 await this.setStateAsync('info.installationName',installations.data['installations'][0]['name'],true);
                 await this.setStateAsync('info.installationId',parseInt(installations.data['installations'][0]['id']),true);
-
+                this.token = installations.data['token'];
+                this.id = installations.data['installations'][0]['id'];
                 // load device data, currently only first device supported
-                this.getDeviceData(installations.data['token'],installations.data['installations'][0]['id']);
+                this.getDeviceData();
             } else {
                 this.log.warn('Server is returning: '+installations.status);
                 this.setState('info.connection', false, true);
@@ -168,20 +162,32 @@ class Idm extends utils.Adapter {
 
     }
 
-    async getDeviceData(token, id){
+    async getDeviceData(){
 
         try {
             const payload = new URLSearchParams();
-            payload.append('token',token);
-            payload.append('installation',id);
+            payload.append('token',this.token);
+            payload.append('installation',this.id);
 
             // @ts-ignore
             const deviceValues = await this.idmApiClient.post('/api/installation/values',payload);
 
             if (deviceValues.status == 200){
 
-                this.log.debug('Successfully received device data');
+                this.log.debug('Received device data');
+
+                if (!this.debugData){
+                    // debug all circuits found in current heat pump
+                    this.log.debug('Device-Data: '+JSON.stringify(deviceValues.data));
+                    deviceValues.data['circuits'].forEach((item,idx) => {
+                        this.log.debug('Circuit-Data '+idx+': '+JSON.stringify(item));
+                    });
+
+                    this.debugData = true;
+                }
+
                 this.setState('info.connection', true, true);
+                this.subscribeStates('*setMode*');
 
                 const convertState = {
                     'icon_12': 'off',           // system & circuit
@@ -200,30 +206,30 @@ class Idm extends utils.Adapter {
                 };
 
                 // updating water values
-                await this.setStateAsync('tempHygienic',this.doConvertToFloat(deviceValues.data['temp_hygienic']),true);
-                await this.setStateAsync('tempWater',this.doConvertToFloat(deviceValues.data['temp_water']),true);
+                await this.setStateAsync('system.values.tempHygienic',this.doConvertToFloat(deviceValues.data['temp_hygienic']),true);
+                await this.setStateAsync('system.values.tempWater',this.doConvertToFloat(deviceValues.data['temp_water']),true);
 
                 // updating system values
-                await this.setStateAsync('mode',convertMode[deviceValues.data['mode']],true);
+                await this.setStateAsync('system.values.mode',convertMode[deviceValues.data['mode']],true);
                 this.log.debug('Current system mode: '+deviceValues.data['mode']);
-                await this.setStateAsync('state',convertState[deviceValues.data['state']],true);
+                await this.setStateAsync('system.values.state',convertState[deviceValues.data['state']],true);
                 this.log.debug('Current system state: '+deviceValues.data['state']);
-                await this.setStateAsync('sumHeat',this.doConvertToFloat(deviceValues.data['sum_heat']),true);
-                await this.setStateAsync('tempOutside',this.doConvertToFloat(deviceValues.data['temp_outside']),true);
-                await this.setStateAsync('error',deviceValues.data['error'],true);
-                await this.setStateAsync('errors',JSON.stringify(deviceValues.data['errors']),true);
+                await this.setStateAsync('system.values.sumHeat',this.doConvertToFloat(deviceValues.data['sum_heat']),true);
+                await this.setStateAsync('system.values.tempOutside',this.doConvertToFloat(deviceValues.data['temp_outside']),true);
+                await this.setStateAsync('system.values.error',deviceValues.data['error'],true);
+                await this.setStateAsync('system.values.errors',JSON.stringify(deviceValues.data['errors']),true);
                 this.log.debug('Current errors: '+JSON.stringify(deviceValues.data['errors']));
 
                 // updating circuit values
-                await this.setStateAsync('circuits.0.mode',convertMode[deviceValues.data['circuits'][0]['mode']],true);
+                await this.setStateAsync('circuits.0.values.mode',convertMode[deviceValues.data['circuits'][0]['mode']],true);
                 this.log.debug('Current circuit mode: '+deviceValues.data['circuits'][0]['mode']);
-                await this.setStateAsync('circuits.0.state',convertState[deviceValues.data['circuits'][0]['state']],true);
+                await this.setStateAsync('circuits.0.values.state',convertState[deviceValues.data['circuits'][0]['state']],true);
                 this.log.debug('Current circuit state: '+deviceValues.data['circuits'][0]['state']);
-                await this.setStateAsync('circuits.0.tempHeat',this.doConvertToFloat(deviceValues.data['temp_heat']),true);
-                await this.setStateAsync('circuits.0.tempParamsNormal',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_normal']['value']),true);
-                await this.setStateAsync('circuits.0.tempParamsEco',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_eco']['value']),true);
-                await this.setStateAsync('circuits.0.tempForerun',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun']),true);
-                await this.setStateAsync('circuits.0.tempForerunActual',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun_actual']),true);
+                await this.setStateAsync('circuits.0.values.tempHeat',this.doConvertToFloat(deviceValues.data['temp_heat']),true);
+                await this.setStateAsync('circuits.0.values.tempParamsNormal',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_normal']['value']),true);
+                await this.setStateAsync('circuits.0.values.tempParamsEco',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_params_eco']['value']),true);
+                await this.setStateAsync('circuits.0.values.tempForerun',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun']),true);
+                await this.setStateAsync('circuits.0.values.tempForerunActual',this.doConvertToFloat(deviceValues.data['circuits'][0]['temp_forerun_actual']),true);
 
             } else {
                 this.log.warn('Server is returning: '+deviceValues.status);
@@ -237,7 +243,60 @@ class Idm extends utils.Adapter {
 
     }
 
+    // Executing system or circuit command
+    async doExecuteCommand(id,command,cmd,val,circuit){
 
+        try {
+            const payload = new URLSearchParams();
+            payload.append('token',this.token);
+            payload.append('installation',this.id);
+            payload.append('command',cmd);
+            // @ts-ignore
+            payload.append('value',val);
+
+            if (circuit){
+                payload.append('circuit',circuit);
+            }
+
+            if (!this.token)
+                this.log.error('Cmd: no token set');
+            if (!this.id)
+                this.log.error('Cmd: no installation id set');
+            if (!cmd)
+                this.log.error('Cmd: no command set');
+            if (val === null)
+                this.log.error('Cmd: no value set');
+
+            // @ts-ignore
+            const response = await this.idmApiClient.post('/api/installation/command',payload);
+
+            if (response.status == 200){
+
+                this.log.debug('Received command <'+command+'>: '+cmd+', value: '+val+', circuit: '+circuit);
+                this.log.debug('Return message: '+JSON.stringify(response.data));
+
+                if (response.data['status']){
+                    this.setState(id,true,true);
+                } else {
+                    this.log.warn('Command <'+command+'> not acknowledged!');
+                }
+
+            } else {
+
+                this.log.warn('Server is returning: '+response.status);
+                this.log.debug('command: '+command);
+                this.log.debug('value: '+val);
+                this.log.debug('circuit: '+circuit);
+
+            }
+
+        } catch (err) {
+
+            this.log.error(err);
+
+        }
+
+    }
     /**
      * Is called when adapter shuts down - callback has to be called under any circumstances!
      * @param {() => void} callback
@@ -260,22 +319,20 @@ class Idm extends utils.Adapter {
         }
     }
 
-    // If you need to react to object changes, uncomment the following block and the corresponding line in the constructor.
-    // You also need to subscribe to the objects with `this.subscribeObjects`, similar to `this.subscribeStates`.
-    // /**
-    //  * Is called if a subscribed object changes
-    //  * @param {string} id
-    //  * @param {ioBroker.Object | null | undefined} obj
-    //  */
-    // onObjectChange(id, obj) {
-    //     if (obj) {
-    //         // The object was changed
-    //         this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-    //     } else {
-    //         // The object was deleted
-    //         this.log.info(`object ${id} deleted`);
-    //     }
-    // }
+    /**
+    * Is called if a subscribed object changes
+    * @param {string} id
+    * @param {ioBroker.Object | null | undefined} obj
+    */
+    onObjectChange(id, obj) {
+        if (obj) {
+            // The object was changed
+            this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+        } else {
+            // The object was deleted
+            this.log.info(`object ${id} deleted`);
+        }
+    }
 
     /**
      * Is called if a subscribed state changes
@@ -283,12 +340,90 @@ class Idm extends utils.Adapter {
      * @param {ioBroker.State | null | undefined} state
      */
     onStateChange(id, state) {
+
+        // Command for setting circuit modes:
+        // www.myidm.at /api/installation/command
+        // token: token
+        // installation: id
+        // command: circuit_mode
+        // value: 0 (off) 1 (time_program) 2 (normal) 3 (eco) 4 (manual_heating) 5 (manual_cooling)
+        // circuit: 0
+
+        // Command for setting system modes:
+        // www.myidm.at /api/installation/command
+        // token: token
+        // installation: id
+        // command: system_mode
+        // value: 0 (off) 1 (automatic) 2 (hot_water) 3 (hot_water_once)
+        // hot_water_once will never be displayed as mode (more like a button). hot_water_once activates state "hot_water". mode changes (back) to "automatic"
+
+        if (id && state && !state.ack) {
+
+            const matches = id.match(new RegExp(this.namespace + '(.system)?(.circuits.([0-9]+))?.command.([a-zA-Z]+)'));
+            if (matches) {
+                const circuit = matches[3];
+                const command = matches[4];
+
+                let cmd = null;
+                let val = null;
+
+                if (circuit){
+
+                    // Circuit Commands
+                    cmd = 'circuit_mode';
+                    switch (command) {
+                        case 'setModeOff':
+                            val = 0;
+                            break;
+                        case 'setModeTimeProgram':
+                            val = 1;
+                            break;
+                        case 'setModeNormal':
+                            val = 2;
+                            break;
+                        case 'setModeEco':
+                            val = 3;
+                            break;
+                        case 'setModeManualHeating':
+                            val = 4;
+                            break;
+                        case 'setModeManualCooling':
+                            val = 5;
+                            break;
+                    }
+
+                } else {
+
+                    // System Commands
+                    cmd = 'system_mode';
+                    switch (command) {
+                        case 'setModeOff':
+                            val = 0;
+                            break;
+                        case 'setModeAutomatic':
+                            val = 1;
+                            break;
+                        case 'setModeHotWater':
+                            val = 2;
+                            break;
+                        case 'setModeHotWaterOnce':
+                            val = 3;
+                            break;
+                    }
+
+                }
+
+                // Send correct command
+                this.doExecuteCommand(id,command,cmd,val,circuit);
+
+            }
+        }
         if (state) {
             // The state was changed
-            this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+            this.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
         } else {
             // The state was deleted
-            this.log.info(`state ${id} deleted`);
+            this.log.debug(`state ${id} deleted`);
         }
     }
 

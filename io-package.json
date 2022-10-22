@@ -13,7 +13,6 @@
         "it": "struttura del canale modificata per la compatibilità futura",
         "es": "cambio de estructura de canales para la compatibilidad futura",
         "pl": "zmieniona struktura kanałowa dla przyszłej kompatybilności",
-        "uk": "змінено структуру каналів для майбутньої сумісності",
         "zh-cn": "b. 改变今后兼容性的渠道结构"
       },
       "0.1.1": {
@@ -238,21 +237,177 @@
       "native": {}
     },
     {
+      "_id": "system",
+      "type": "channel",
+      "common": {
+        "name": {
+          "en": "System",
+          "de": "System",
+          "ru": "Система",
+          "pt": "Sistema",
+          "nl": "Systeem",
+          "fr": "Système",
+          "it": "Sistema",
+          "es": "Sistema",
+          "pl": "System",
+          "uk": "Система",
+          "zh-cn": "系统"
+        }
+      },
+      "native": {}
+    },
+    {
+      "_id": "system.command",
+      "type": "channel",
+      "common": {
+        "name": {
+          "en": "System control",
+          "de": "Systemsteuerung",
+          "ru": "Система управления",
+          "pt": "Controle do sistema",
+          "nl": "Systeem controle",
+          "fr": "Contrôle du système",
+          "it": "Controllo del sistema",
+          "es": "Control de sistemas",
+          "pl": "System kontroli",
+          "uk": "Контроль системи",
+          "zh-cn": "系统控制"
+        }
+      },
+      "native": {}
+    },
+    {
+      "_id": "system.values",
+      "type": "channel",
+      "common": {
+        "name": {
+          "en": "Values",
+          "de": "Werte",
+          "ru": "Ценности",
+          "pt": "Valores",
+          "nl": "Values",
+          "fr": "Valeurs",
+          "it": "Valori",
+          "es": "Valores",
+          "pl": "Value",
+          "uk": "Вартість",
+          "zh-cn": "价值"
+        }
+      },
+      "native": {}
+    },
+    {
+      "_id": "system.command.setModeOff",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Off",
+          "de": "Aus",
+          "ru": "Выкл",
+          "pt": "Fora",
+          "nl": "Vertaling:",
+          "fr": "Officier",
+          "it": "Fuori",
+          "es": "Fuera",
+          "pl": "Off off",
+          "uk": "Відправити",
+          "zh-cn": "百分比"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "system.command.setModeAutomatic",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Automatic",
+          "de": "Automatisch",
+          "ru": "Автоматическая",
+          "pt": "Automática automática",
+          "nl": "Automatisch",
+          "fr": "Automatique",
+          "it": "Automatico",
+          "es": "Automático",
+          "pl": "Automatyczny",
+          "uk": "Автоматична",
+          "zh-cn": "自动化"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "system.command.setModeHotWater",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Hot water",
+          "de": "Warmwasser",
+          "ru": "Горячая вода",
+          "pt": "Água quente",
+          "nl": "Heet water",
+          "fr": "Eau chaude",
+          "it": "Acqua calda",
+          "es": "Agua caliente",
+          "pl": "Wody pitnej",
+          "uk": "Гаряча вода",
+          "zh-cn": "水"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "system.command.setModeHotWaterOnce",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Hot water once",
+          "de": "Einmalige Warmwasserladung",
+          "ru": "Горячая вода один раз",
+          "pt": "Água quente uma vez",
+          "nl": "Heet water ooit",
+          "fr": "Eau chaude une fois",
+          "it": "Acqua calda una volta",
+          "es": "Agua caliente una vez",
+          "pl": "Woda pitna",
+          "uk": "Гаряча вода раз",
+          "zh-cn": "水"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
       "_id": "circuits",
       "type": "channel",
       "common": {
         "name": {
-          "en": "Heating circuits",
-          "de": "Heizkreisläufe",
-          "ru": "Отопление",
-          "pt": "Circuitos de aquecimento",
-          "nl": "Heetende circuits",
-          "fr": "Circuits de chauffage",
-          "it": "Circuiti di riscaldamento",
-          "es": "Circuitos de calefacción",
-          "pl": "Łączy towary",
-          "uk": "Нагрівальні схеми",
-          "zh-cn": "D. 排 票"
+          "en": "System control",
+          "de": "Systemsteuerung",
+          "ru": "Система управления",
+          "pt": "Controle do sistema",
+          "nl": "Systeem controle",
+          "fr": "Contrôle du système",
+          "it": "Controllo del sistema",
+          "es": "Control de sistemas",
+          "pl": "System kontroli",
+          "uk": "Контроль системи",
+          "zh-cn": "系统控制"
         }
       },
       "native": {}
@@ -278,7 +433,191 @@
       "native": {}
     },
     {
-      "_id": "circuits.0.tempHeat",
+      "_id": "circuits.0.command",
+      "type": "channel",
+      "common": {
+        "name": {
+          "en": "Heating circuit control",
+          "de": "Heizkreissteuerung",
+          "ru": "Контроль цепи нагрева",
+          "pt": "Controle de circuito de aquecimento",
+          "nl": "Heling circuit controle",
+          "fr": "Contrôle du circuit de chauffage",
+          "it": "Controllo del circuito di riscaldamento",
+          "es": "Control de circuito de calefacción",
+          "pl": "Kontrola obwodu",
+          "uk": "Контроль теплової схеми",
+          "zh-cn": "排 定 控制"
+        }
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0.values",
+      "type": "channel",
+      "common": {
+        "name": {
+          "en": "Values",
+          "de": "Werte",
+          "ru": "Ценности",
+          "pt": "Valores",
+          "nl": "Values",
+          "fr": "Valeurs",
+          "it": "Valori",
+          "es": "Valores",
+          "pl": "Value",
+          "uk": "Вартість",
+          "zh-cn": "价值"
+        }
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0.command.setModeOff",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Off",
+          "de": "Aus",
+          "ru": "Выкл",
+          "pt": "Fora",
+          "nl": "Vertaling:",
+          "fr": "Officier",
+          "it": "Fuori",
+          "es": "Fuera",
+          "pl": "Off off",
+          "uk": "Відправити",
+          "zh-cn": "百分比"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0.command.setModeTimeProgram",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Time program",
+          "de": "Zeitprogramm",
+          "ru": "Программа времени",
+          "pt": "Programa de tempo",
+          "nl": "Tijd om te gaan",
+          "fr": "Programme de temps",
+          "it": "Programma del tempo",
+          "es": "Programa de tiempo",
+          "pl": "Program Time",
+          "uk": "Програма",
+          "zh-cn": "时间方案"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0.command.setModeNormal",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Normal",
+          "de": "Normal",
+          "ru": "Нормальный",
+          "pt": "Normal",
+          "nl": "Normaal",
+          "fr": "Normal",
+          "it": "Normale",
+          "es": "Normal",
+          "pl": "Normalny",
+          "uk": "Нормативно",
+          "zh-cn": "规范"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0.command.setModeEco",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Eco",
+          "de": "Eco",
+          "ru": "Эко",
+          "pt": "Eco",
+          "nl": "Eco",
+          "fr": "Eco",
+          "it": "Eco",
+          "es": "Eco",
+          "pl": "Eco",
+          "uk": "Еко",
+          "zh-cn": "Eco"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0.command.setModeManualHeating",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Manual heating",
+          "de": "Manuelles Heizen",
+          "ru": "Ручное отопление",
+          "pt": "Aquecimento manual",
+          "nl": "Manuele genezing",
+          "fr": "Chauffage manuel",
+          "it": "Riscaldamento manuale",
+          "es": "Calefacción manual",
+          "pl": "Ogrzewanie",
+          "uk": "Ручне опалення",
+          "zh-cn": "手册"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0.command.setModeManualCooling",
+      "type": "state",
+      "common": {
+        "name": {
+          "en": "Manual cooling",
+          "de": "Manuelles Kühlen",
+          "ru": "Ручное охлаждение",
+          "pt": "Arrefecimento manual",
+          "nl": "Manuele koeling",
+          "fr": "Refroidissement manuel",
+          "it": "Raffreddamento manuale",
+          "es": "Enfriamiento manual",
+          "pl": "Chłodzenie",
+          "uk": "Ручне охолодження",
+          "zh-cn": "手册的冷却"
+        },
+        "type": "boolean",
+        "role": "button",
+        "read": false,
+        "write": true
+      },
+      "native": {}
+    },
+    {
+      "_id": "circuits.0.values.tempHeat",
       "type": "state",
       "common": {
         "name": {
@@ -303,7 +642,7 @@
       "native": {}
     },
     {
-      "_id": "circuits.0.tempParamsNormal",
+      "_id": "circuits.0.values.tempParamsNormal",
       "type": "state",
       "common": {
         "name": {
@@ -328,7 +667,7 @@
       "native": {}
     },
     {
-      "_id": "circuits.0.tempParamsEco",
+      "_id": "circuits.0.values.tempParamsEco",
       "type": "state",
       "common": {
         "name": {
@@ -353,7 +692,7 @@
       "native": {}
     },
     {
-      "_id": "circuits.0.tempForerun",
+      "_id": "circuits.0.values.tempForerun",
       "type": "state",
       "common": {
         "name": {
@@ -378,7 +717,7 @@
       "native": {}
     },
     {
-      "_id": "circuits.0.tempForerunActual",
+      "_id": "circuits.0.values.tempForerunActual",
       "type": "state",
       "common": {
         "name": {
@@ -403,7 +742,7 @@
       "native": {}
     },
     {
-      "_id": "circuits.0.state",
+      "_id": "circuits.0.values.state",
       "type": "state",
       "common": {
         "name": {
@@ -427,7 +766,7 @@
       "native": {}
     },
     {
-      "_id": "circuits.0.mode",
+      "_id": "circuits.0.values.mode",
       "type": "state",
       "common": {
         "name": {
@@ -451,7 +790,7 @@
       "native": {}
     },
     {
-      "_id": "tempHygienic",
+      "_id": "system.values.tempHygienic",
       "type": "state",
       "common": {
         "name": {
@@ -476,7 +815,7 @@
       "native": {}
     },
     {
-      "_id": "tempWater",
+      "_id": "system.values.tempWater",
       "type": "state",
       "common": {
         "name": {
@@ -501,7 +840,7 @@
       "native": {}
     },
     {
-      "_id": "sumHeat",
+      "_id": "system.values.sumHeat",
       "type": "state",
       "common": {
         "name": {
@@ -526,7 +865,7 @@
       "native": {}
     },
     {
-      "_id": "tempOutside",
+      "_id": "system.values.tempOutside",
       "type": "state",
       "common": {
         "name": {
@@ -551,7 +890,7 @@
       "native": {}
     },
     {
-      "_id": "state",
+      "_id": "system.values.state",
       "type": "state",
       "common": {
         "name": {
@@ -575,7 +914,7 @@
       "native": {}
     },
     {
-      "_id": "mode",
+      "_id": "system.values.mode",
       "type": "state",
       "common": {
         "name": {
@@ -599,7 +938,7 @@
       "native": {}
     },
     {
-      "_id": "error",
+      "_id": "system.values.error",
       "type": "state",
       "common": {
         "name": {
@@ -623,7 +962,7 @@
       "native": {}
     },
     {
-      "_id": "errors",
+      "_id": "system.values.errors",
       "type": "state",
       "common": {
         "name": {
