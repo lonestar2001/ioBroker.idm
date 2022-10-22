@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "idm",
-    "version": "0.2.0",
+    "version": "1.0.0",
     "news": {
+      "1.0.0": {
+        "en": "added controls for system and circuit mode\nadded debug information",
+        "de": "zusätzliche steuerungen für system- und schaltungsmodus\ndebug information",
+        "ru": "добавлено управление для режима системы и цепи\nдобавлена информация об отладке",
+        "pt": "controles adicionados para sistema e modo de circuito\nadicionado informações de depuração",
+        "nl": "voegde controle toe voor systeem en circuitmode\nvertaling:",
+        "fr": "commandes supplémentaires pour le système et le mode circuit\ninformations supplémentaires debug",
+        "it": "comandi aggiunti per la modalità sistema e circuito\naggiunto debug informazioni",
+        "es": "controles añadidos para el modo de sistema y circuito\nmás información de depuración",
+        "pl": "dodano kontrolę systemu i trybu obwodowego\ndebug information",
+        "uk": "додано контрольні системи та режим ланцюга\nдодана інформація",
+        "zh-cn": "系统控制和流通模式\n补充信息"
+      },
       "0.2.0": {
         "en": "changed channel structure for future compatibility",
         "de": "geänderte kanalstruktur für zukünftige kompatibilität",
